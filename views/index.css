@@ -1,0 +1,11 @@
+html {
+    font-family: 'proxima-nova', sans-serif;
+    font-size: 20px;
+    min-width: 450px;
+}
+
+body {
+    margin: 0;
+    background-color: #080f28;
+    color: white;
+}
