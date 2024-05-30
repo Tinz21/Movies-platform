@@ -1,9 +1,8 @@
 """ Views movies """
-
 from typing import Optional
-from fastapi import APIRouter, status, Path, Request
+from fastapi import APIRouter, status, Request, Query
 from db.connection_interface import Database
-from models.models import Movies, Movies_return
+from app.movies.models import Movies, Movies_return
 
 
 router = APIRouter()
@@ -12,17 +11,22 @@ router = APIRouter()
 @router.get(
     path='/{init}&{end}',
     status_code=status.HTTP_200_OK,
+    response_model=Movies,
+    tags=['Movies'],
+    summary='Get a list of movies'
 )
-def get_movies(request: Request):
+def get_movies(
+        title: Optional[str] = Query(None),
+        year: Optional[int] = Query(None),
+        genre: Optional[str] = Query(None)
+):
     """
+    Get movies
 
-    :param request: {'title': '', 'gender': '', 'year': ''}
-
-
-    :return: [{'title': '', 'gender': '', 'release_date': '', 'url': ''}, ...]
+    This path operations get a filtered list of movies
     """
     table = Database(Movies)
-    filters = request.query_params
+    filters = {'title': title, 'genre': genre, 'year': year}
     movies = table.get_many_filters(filters=filters)
     for i in range(len(movies)):
         movies[i].release_date = movies[i].release_date.year
@@ -33,12 +37,14 @@ def get_movies(request: Request):
     path='/slides',
     status_code=status.HTTP_200_OK,
     response_model=list[Movies_return],
+    tags=['Movies'],
+    summary='Get random movies'
 )
 def get_movie(request: Request):
     """
+    Get random movies
 
-    :param request:
-    :return:
+    This path operations get a list of 5 random movies
     """
     table = Database(Movies)
     filters = request.query_params

@@ -44,14 +44,13 @@ class Postgres(DataBaseInterface):
 
 def sql_filter_movies(filters):
     response = ''
-    list_filters = list(filters)
-    if 'genre' in list_filters:
+    if filters['genre']:
         response = f"genre LIKE '%{filters['genre']}%'"
-    if 'year' in list_filters:
+    if filters['year']:
         if response == '':
             response = f"EXTRACT(YEAR FROM release_date)={filters['year']}"
         else:
             response = response + f" and EXTRACT(YEAR FROM release_date)={filters['year']}"
-    if 'title' in list_filters:
+    if filters['title']:
         response = f"title ILIKE '%{filters['title']}%'"
     return response

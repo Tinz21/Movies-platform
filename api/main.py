@@ -2,9 +2,22 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from views import router as movie
+from app.movies.views import router as movie
 
-app = FastAPI()
+
+description = """
+You can select a movie to watch when you are bored
+## Movies
+You will be able to:
+* **Apply filters**
+* **Get 5 random movies**
+"""
+
+app = FastAPI(
+    title="Movies platform",
+    description=description,
+    version="0.0.1",
+)
 
 origins = [
     "http://localhost:5173",
