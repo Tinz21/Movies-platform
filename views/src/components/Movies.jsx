@@ -1,3 +1,6 @@
+/*
+  Render a list of movies
+*/
 import React, { useState } from 'react'
 import { getMovies } from '../utilities/getMovies'
 import { Modal } from './Modal'

@@ -1,3 +1,6 @@
+/*
+  Render the nav bar
+*/
 import React, { useRef, useContext } from 'react'
 import { FiSearch } from 'react-icons/fi'
 import { Context } from '../ContextMovies'

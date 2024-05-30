@@ -1,26 +1,17 @@
-import axios from 'axios'
-import React, { useEffect, useMemo, useState } from 'react'
-import { getMovies } from '../utilities/getMovies'
+/*
+  Render a presentation of movies
+  appearing under the nav bar. A space for promotional movies.
+*/
+import React, { useMemo, useState } from 'react'
 import { useDebounce } from 'use-debounce'
+import { getMovies } from '../utilities/getMovies'
+import { useRandomMovies } from '../hooks/useRandomMovies'
 import './Promotions.css'
 
-const urlBackend = 'http://127.0.0.1:8000/slides'
-
 function Promotions () {
-  const [slide, setSlide] = useState(null)
   const [currentIndex, setCurrentIndex] = useState(-1)
   const [debounced] = useDebounce(currentIndex, 10000)
-
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: urlBackend
-    }).then((res) =>
-      res.data
-    ).then((res) => {
-      setSlide(res)
-    })
-  }, [])
+  const slide = useRandomMovies()
 
   useMemo(() => {
     if (currentIndex === 4) {
