@@ -1,5 +1,5 @@
 """ Views movies """
-from typing import Optional
+from typing import Union
 from fastapi import APIRouter, status, Request, Query
 from db.connection_interface import Database
 from app.movies.models import Movies, Movies_return
@@ -11,14 +11,14 @@ router = APIRouter()
 @router.get(
     path='/{init}&{end}',
     status_code=status.HTTP_200_OK,
-    response_model=Movies,
+    response_model=list[Movies],
     tags=['Movies'],
     summary='Get a list of movies'
 )
 def get_movies(
-        title: Optional[str] = Query(None),
-        year: Optional[int] = Query(None),
-        genre: Optional[str] = Query(None)
+        title: Union[None, str] = None,
+        year: Union[None, str] = None,
+        genre: Union[None, str] = None,
 ):
     """
     Get movies
