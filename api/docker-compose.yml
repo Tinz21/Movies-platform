@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  back_movies:
+    build: .
+    command: bash -c 'while !</dev/tcp/movies/5432; do sleep 1; done; uvicorn app.main:app --host 0.0.0.0'
+    container_name: back_movies
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_SERVER: movies
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: movies
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - movies
+
+  movies:
+    image: postgres:15-alpine
+    container_name: db_movies
+    restart: always
+    expose:
+      - 5432
+    volumes:
+      - movies_data:/var/lib/postgresql/data/
+
+  pgadmin4:
+      image: dpage/pgadmin4
+      container_name: pgadmin4_container
+      restart: always
+      ports:
+        - "8888:80"
+      environment:
+        PGADMIN_DEFAULT_EMAIL: tzalabata15@gmail.com
+        PGADMIN_DEFAULT_PASSWORD: admin
+      volumes:
+        - pgadmin_data:/db/pgadmin
+
+volumes:
+  movies_data:
+  pgadmin_data:

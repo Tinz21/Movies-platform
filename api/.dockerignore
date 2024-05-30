@@ -1,0 +1,7 @@
+venv/
+app/db/movies.csv
+app/db/pg_hba_custom.conf
+app/db/docker-compose.yml
+app/db/.env
+**/__pycache__/*
+**/.idea/*

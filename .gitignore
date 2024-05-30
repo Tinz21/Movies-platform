@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 views/package-lock.json
 views/node_modules/
+
+venv/
+__pycache__/
+.env
