@@ -1,0 +1,74 @@
+:root {
+  --background-color: #192b6d;
+}
+
+@media (max-width: 800px) {
+  li {
+    width: 100%;
+  }
+  .tabpanel-tab {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    justify-content: space-between;
+    padding: 16px 0;
+    text-shadow: 0 0 3px #000000, 0 0 6px #000000;
+  }
+}
+
+@media (min-width: 801px) {  
+  .tabpanel-tab {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-right: 32px;
+    text-shadow: 0 0 3px #000000, 0 0 6px #000000;
+    gap: 5px;
+  }
+  .tabpanel-menuactive {
+    position: absolute;
+    transform: translate(10px, 10px);
+  }
+}
+.tabpanel-tab > p{
+  margin: 0;
+  padding-left: 16px;
+}
+.tabpanel-tab:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.tabpanel-menuhiden {
+  display: none;
+}
+.tabpanel-menuactive p {
+  margin: 0;
+  color: var(--background-color);
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 16px solid var(--background-color);
+  transform: translate(10px, -12px);
+}
+.tabpanel-tab-arrow {
+  color: rgb(41, 87, 255);
+  font-weight: 900;
+}
+.tabpanel-menuactive ul {
+  background: var(--background-color);
+  border-radius: 8px;
+}
+.tabpanel-menuactive--list {
+  padding: 10px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.tabpanel-menuactive--list:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}

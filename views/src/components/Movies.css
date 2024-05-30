@@ -1,0 +1,40 @@
+.movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+    justify-content: center;
+}
+.movie {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.imgmovie {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    box-shadow: 0 4px 8px rgba(143, 160, 222, 0.5);
+}
+.imgmovie:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+.imgmovie-poster {
+    width: 100%;
+}
+.imgmovie-year {
+    background-color: #007aff;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 0;
+    position: absolute;
+    
+}
+.title {
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+li, ul, img {
+  padding: 0;
+}
