@@ -2,7 +2,7 @@ version: "3.8"
 services:
   back_movies:
     build: .
-    command: bash -c 'while !</dev/tcp/movies/5432; do sleep 1; done; uvicorn app.main:app --host 0.0.0.0'
+    command: bash -c 'while !</dev/tcp/movies/5432; do sleep 1; done; uvicorn main:app --host 0.0.0.0'
     container_name: back_movies
     environment:
       POSTGRES_USER: admin
@@ -25,6 +25,12 @@ services:
       - 5432
     volumes:
       - movies_data:/var/lib/postgresql/data/
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/movies.csv:/docker-entrypoint-initdb.d/movies.csv
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: movies
 
   pgadmin4:
       image: dpage/pgadmin4
