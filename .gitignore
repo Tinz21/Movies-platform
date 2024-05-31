@@ -24,6 +24,7 @@ dist-ssr
 *.sw?
 views/package-lock.json
 views/node_modules/
+.vite/
 
 venv/
 __pycache__/
